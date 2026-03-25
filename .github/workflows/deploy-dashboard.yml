@@ -37,6 +37,8 @@ jobs:
 
       - name: Build static export
         working-directory: dashboard
+        env:
+          NEXT_PUBLIC_BASE_PATH: /CST2310_OpenAI_Enterprise_Billing
         run: npm run build
 
       - name: Upload Pages artifact
