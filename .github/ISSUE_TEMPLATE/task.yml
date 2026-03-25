@@ -1,0 +1,97 @@
+name: Task
+description: A work package from the WBS or a new deliverable task
+labels: ["task"]
+body:
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Project Phase
+      description: Which Unified Process phase does this task belong to?
+      options:
+        - "Inception Phase (Weeks 7-8)"
+        - "Elaboration Phase (Weeks 9-11)"
+        - "Submission (Week 12)"
+    validations:
+      required: true
+
+  - type: input
+    id: wbs-code
+    attributes:
+      label: WBS Code
+      description: Reference code from the Work Breakdown Structure
+      placeholder: "e.g. 3.2.1"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Deliverable Category
+      description: Which report section does this task relate to?
+      options:
+        - "N/A — Project-wide"
+        - "Case Study"
+        - "Use Case Diagrams"
+        - "Use Case Descriptors"
+        - "Class Diagram / ERD"
+        - "Activity Diagrams"
+        - "Sequence Diagrams"
+        - "Collaboration Diagrams"
+        - "User Interfaces"
+        - "Project Management"
+        - "Law & Ethics"
+        - "Report / Presentation"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Task Description
+      description: What needs to be done?
+      placeholder: "Describe the task clearly so the assignee can work independently."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: How do we know this task is complete?
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+    validations:
+      required: true
+
+  - type: input
+    id: due-date
+    attributes:
+      label: Due Date
+      description: When must this be completed?
+      placeholder: "e.g. End of Week 9 (04/04/2026)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: files
+    attributes:
+      label: Files to Create or Edit
+      description: Which repository files does this task affect?
+      placeholder: |
+        - `03-uml-models/sequence-diagrams.md`
+        - `04-user-interfaces/ui-designs.md`
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - "Critical — blocks other work"
+        - "High — on the critical path"
+        - "Medium — important but not blocking"
+        - "Low — nice to have"
+    validations:
+      required: true

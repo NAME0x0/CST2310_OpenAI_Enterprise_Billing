@@ -1,0 +1,66 @@
+name: Research
+description: A research task — investigate a topic and document findings
+labels: ["research"]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Research Topic
+      placeholder: "e.g. Nielsen's 10 Usability Heuristics for billing dashboards"
+    validations:
+      required: true
+
+  - type: textarea
+    id: questions
+    attributes:
+      label: Research Questions
+      description: What specific questions should this research answer?
+      placeholder: |
+        1. What are the key principles?
+        2. How do they apply to our system?
+        3. What academic references support this?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Relevant Section
+      options:
+        - "N/A — General"
+        - "Case Study"
+        - "UML Models"
+        - "User Interfaces"
+        - "Project Management"
+        - "Law & Ethics"
+    validations:
+      required: true
+
+  - type: input
+    id: output-file
+    attributes:
+      label: Output File
+      description: Where should findings be documented?
+      placeholder: "e.g. 05-law-ethics/gdpr-analysis.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Suggested Sources
+      description: Any known starting points for this research?
+      placeholder: |
+        - Academic textbooks
+        - ICO guidance documents
+        - W3C standards
+    validations:
+      required: false
+
+  - type: input
+    id: due-date
+    attributes:
+      label: Due Date
+      placeholder: "e.g. End of Week 9"
+    validations:
+      required: true

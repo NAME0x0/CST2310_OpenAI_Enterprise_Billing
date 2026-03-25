@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Marking Criteria
+    url: https://github.com
+    about: Review marking criteria and grade descriptors before submission (update URL after repo creation)

@@ -1,0 +1,73 @@
+name: Meeting Agenda
+description: Prepare the agenda for a formal weekly meeting
+labels: ["meeting"]
+body:
+  - type: dropdown
+    id: week
+    attributes:
+      label: Week Number
+      options:
+        - "Week 7"
+        - "Week 8"
+        - "Week 9"
+        - "Week 10"
+        - "Week 11"
+        - "Week 12"
+    validations:
+      required: true
+
+  - type: input
+    id: date
+    attributes:
+      label: Meeting Date
+      placeholder: "DD/MM/YYYY"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Meeting Type
+      options:
+        - "Formal (with seminar tutor)"
+        - "Informal (team only)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: UP Phase
+      options:
+        - "Inception"
+        - "Elaboration"
+    validations:
+      required: true
+
+  - type: textarea
+    id: agenda
+    attributes:
+      label: Agenda Items
+      description: Topics to discuss in this meeting
+      value: |
+        1. Progress updates from each member
+        2. Review project status vs Gantt chart
+        3. Review any blockers or risks
+        4. Review draft UML diagrams (if Elaboration phase)
+        5. Confirm/update WBS and plan if needed
+        6. Allocate next week's tasks
+    validations:
+      required: true
+
+  - type: textarea
+    id: preparation
+    attributes:
+      label: Preparation Required
+      description: What should members prepare before the meeting?
+      value: |
+        - Review your assigned tasks and update status
+        - Update your reflective diary for this week
+        - Bring draft diagrams for peer review
+        - Bring any questions or blockers to discuss
+    validations:
+      required: false

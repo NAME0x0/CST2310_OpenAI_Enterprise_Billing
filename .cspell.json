@@ -1,0 +1,40 @@
+{
+  "version": "0.2",
+  "language": "en-GB",
+  "dictionaries": ["en-gb", "en_US"],
+  "ignorePaths": [
+    "node_modules",
+    ".git",
+    "10-appendices/**",
+    ".github/workflows/**"
+  ],
+  "words": [
+    "CODEOWNERS",
+    "DPIA",
+    "docx",
+    "drawio",
+    "ERD",
+    "GDPR",
+    "heuristics",
+    "interoperability",
+    "Kanban",
+    "MoSCoW",
+    "markdownlint",
+    "Nielsen",
+    "OpenAI",
+    "pandoc",
+    "PlantUML",
+    "RBAC",
+    "SDLC",
+    "swimlane",
+    "swimlanes",
+    "timebox",
+    "timeboxed",
+    "timeboxing",
+    "UCD",
+    "UML",
+    "WCAG",
+    "WBS",
+    "YAML"
+  ]
+}

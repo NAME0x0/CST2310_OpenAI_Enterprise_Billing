@@ -1,0 +1,44 @@
+name: Report Word Count
+
+on:
+  push:
+    branches: [main]
+    paths: ['08-final-report/report.md']
+  pull_request:
+    paths: ['08-final-report/report.md']
+
+jobs:
+  word-count:
+    name: Estimate Report Length
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Count words and estimate pages
+        run: |
+          REPORT="08-final-report/report.md"
+
+          # Strip YAML frontmatter, HTML comments, and Markdown syntax for accurate count
+          CLEAN_TEXT=$(sed '/^---$/,/^---$/d; /<!--/,/-->/d; s/^#\+//; s/\*\*//g; s/|//g; s/---//g' "$REPORT")
+          WORDS=$(echo "$CLEAN_TEXT" | wc -w)
+
+          # TNR 11pt justified ~ 250 words per page
+          PAGES=$((WORDS / 250))
+          REMAINDER=$((WORDS % 250))
+          if [ "$REMAINDER" -gt 0 ]; then
+            PAGES=$((PAGES + 1))
+          fi
+
+          # Section count
+          SECTIONS=$(grep -c '^## ' "$REPORT" || echo 0)
+
+          echo "## Report Size Estimate" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| **Word count** | $WORDS |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Estimated pages** | ~$PAGES |" >> $GITHUB_STEP_SUMMARY
+          echo "| **Sections** | $SECTIONS |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "Report: $WORDS words, ~$PAGES estimated pages"

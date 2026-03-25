@@ -1,0 +1,56 @@
+name: Bug / Issue
+description: Report a problem with a document, diagram, workflow, or configuration
+labels: ["bug"]
+body:
+  - type: input
+    id: file
+    attributes:
+      label: Affected File
+      placeholder: "e.g. 03-uml-models/class-diagram.md"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What's Wrong?
+      description: Describe the issue — incorrect data, broken formatting, missing content, etc.
+      placeholder: "e.g. The class diagram shows a composition relationship where aggregation should be used"
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What Should It Be?
+      description: Describe the correct state or expected content.
+      placeholder: "The Department-Alert relationship should use aggregation (open diamond), not composition."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Issue Category
+      options:
+        - "Incorrect UML notation"
+        - "Incorrect data / wrong figures"
+        - "Broken formatting / rendering"
+        - "Missing content"
+        - "Broken link or reference"
+        - "Spelling / grammar"
+        - "Workflow / CI failure"
+        - "Other"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - "Low — cosmetic or minor"
+        - "Medium — incorrect but not blocking"
+        - "High — blocks other work or affects marking"
+    validations:
+      required: true

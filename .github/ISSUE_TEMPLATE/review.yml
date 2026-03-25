@@ -1,0 +1,41 @@
+name: Review Request
+description: Request a peer review of a report section or UML diagram
+labels: ["review"]
+body:
+  - type: input
+    id: section
+    attributes:
+      label: Section / File to Review
+      placeholder: "e.g. 03-uml-models/sequence-diagrams.md"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: review-type
+    attributes:
+      label: Review Type
+      options:
+        - "Content accuracy — are the facts and diagrams correct?"
+        - "Completeness — does it cover all required criteria?"
+        - "UML correctness — proper notation, symbols, relationships"
+        - "Referencing — Harvard format, all citations present"
+        - "Full review — all of the above"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context for Reviewer
+      description: What should the reviewer focus on or be aware of?
+      placeholder: "e.g. Please check the multiplicity relationships in the class diagram."
+    validations:
+      required: false
+
+  - type: input
+    id: due-date
+    attributes:
+      label: Review Needed By
+      placeholder: "e.g. End of Week 11"
+    validations:
+      required: true

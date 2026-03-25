@@ -1,0 +1,62 @@
+name: Contributor Activity
+
+on:
+  schedule:
+    - cron: '0 9 * * 5'  # Every Friday 9 AM UTC
+  workflow_dispatch:
+
+jobs:
+  activity:
+    name: Weekly Contribution Report
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate contributor stats
+        run: |
+          echo "## Contributor Activity — Last 7 Days" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Member | GitHub | Commits | Files Changed | Lines Added | Lines Removed |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|---|---|---|---|" >> $GITHUB_STEP_SUMMARY
+
+          # Update these with actual team member GitHub handles
+          HANDLES=("Member1Handle" "Member2Handle" "Member3Handle" "Member4Handle")
+          NAMES=("Member 1" "Member 2" "Member 3" "Member 4")
+
+          TOTAL_COMMITS=0
+
+          for i in "${!HANDLES[@]}"; do
+            handle="${HANDLES[$i]}"
+            name="${NAMES[$i]}"
+            COMMITS=$(git log --since="7 days ago" --author="$handle" --oneline 2>/dev/null | wc -l || echo 0)
+            FILES=$(git log --since="7 days ago" --author="$handle" --name-only --pretty=format: 2>/dev/null | sort -u | grep -c . 2>/dev/null || echo 0)
+            ADDITIONS=$(git log --since="7 days ago" --author="$handle" --pretty=format: --numstat 2>/dev/null | awk '{s+=$1} END {print s+0}' || echo 0)
+            DELETIONS=$(git log --since="7 days ago" --author="$handle" --pretty=format: --numstat 2>/dev/null | awk '{s+=$2} END {print s+0}' || echo 0)
+            echo "| $name | @$handle | $COMMITS | $FILES | +$ADDITIONS | -$DELETIONS |" >> $GITHUB_STEP_SUMMARY
+            TOTAL_COMMITS=$((TOTAL_COMMITS + COMMITS))
+          done
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Total team commits this week:** $TOTAL_COMMITS" >> $GITHUB_STEP_SUMMARY
+
+          # All-time stats
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## All-Time Contribution Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Member | Total Commits | First Commit | Latest Commit |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|---|---|" >> $GITHUB_STEP_SUMMARY
+
+          for i in "${!HANDLES[@]}"; do
+            handle="${HANDLES[$i]}"
+            name="${NAMES[$i]}"
+            ALL_COMMITS=$(git log --author="$handle" --oneline 2>/dev/null | wc -l || echo 0)
+            FIRST=$(git log --author="$handle" --reverse --format="%as" 2>/dev/null | head -1 || echo "—")
+            LATEST=$(git log --author="$handle" --format="%as" 2>/dev/null | head -1 || echo "—")
+            [ -z "$FIRST" ] && FIRST="—"
+            [ -z "$LATEST" ] && LATEST="—"
+            echo "| $name | $ALL_COMMITS | $FIRST | $LATEST |" >> $GITHUB_STEP_SUMMARY
+          done

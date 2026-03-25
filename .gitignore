@@ -1,0 +1,19 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office temp files
+~$*
+*.tmp
+
+# Build output (regenerate with pandoc)
+08-final-report/*.docx
+08-final-report/*.pdf
+
+# IDE
+.vscode/
+.idea/
+
+# Node
+node_modules/

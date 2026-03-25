@@ -1,0 +1,30 @@
+name: Stale Issues & PRs
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday 9 AM UTC
+  workflow_dispatch:
+
+jobs:
+  stale:
+    name: Flag Inactive Issues
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v9
+        with:
+          days-before-stale: 7
+          days-before-close: 3
+          stale-issue-message: >
+            This issue has been inactive for 7 days. It will be closed
+            automatically in 3 days unless there is new activity.
+            If this task is still needed, please comment or update the status.
+          stale-pr-message: >
+            This PR has been inactive for 7 days. Please merge, update,
+            or close it. It will be auto-closed in 3 days.
+          stale-issue-label: 'stale'
+          stale-pr-label: 'stale'
+          exempt-issue-labels: 'critical-path,blocked'
+          exempt-pr-labels: 'blocked'

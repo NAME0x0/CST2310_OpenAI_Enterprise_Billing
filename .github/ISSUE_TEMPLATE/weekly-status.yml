@@ -1,0 +1,74 @@
+name: Weekly Status Update
+description: Individual weekly progress check-in
+labels: ["status"]
+body:
+  - type: dropdown
+    id: week
+    attributes:
+      label: Week Number
+      options:
+        - "Week 7"
+        - "Week 8"
+        - "Week 9"
+        - "Week 10"
+        - "Week 11"
+        - "Week 12"
+    validations:
+      required: true
+
+  - type: input
+    id: member
+    attributes:
+      label: Team Member
+      placeholder: "Your name (@GitHubHandle)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: completed
+    attributes:
+      label: Completed This Week
+      placeholder: |
+        - [ ] Finished sequence diagrams for API usage flow
+        - [ ] Updated class diagram with ERD
+    validations:
+      required: true
+
+  - type: textarea
+    id: planned
+    attributes:
+      label: Planned for Next Week
+      placeholder: |
+        - [ ] Write collaboration diagrams
+        - [ ] Review partner's activity diagrams
+    validations:
+      required: true
+
+  - type: textarea
+    id: blockers
+    attributes:
+      label: Blockers or Risks
+      description: Anything preventing progress or that might cause delays?
+      placeholder: "e.g. Waiting on case study approval from tutor"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: On Track?
+      options:
+        - "Yes — on schedule"
+        - "At risk — may slip without action"
+        - "Behind — needs team help"
+    validations:
+      required: true
+
+  - type: textarea
+    id: diary
+    attributes:
+      label: Reflective Diary Updated?
+      description: Confirm you've updated your reflective diary for this week
+      placeholder: "Yes / No — if no, explain why"
+    validations:
+      required: true

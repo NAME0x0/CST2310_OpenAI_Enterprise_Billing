@@ -1,0 +1,80 @@
+name: Build Report
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "08-final-report/**"
+      - "01-project-management/**"
+      - "02-case-study/**"
+      - "03-uml-models/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "08-final-report/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build DOCX with Pandoc
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc
+
+      - name: Build report (DOCX)
+        run: |
+          cd 08-final-report
+          pandoc report.md \
+            -o "CST2310_OpenAI_Enterprise_Billing_Report.docx" \
+            --from=gfm \
+            --to=docx \
+            --toc \
+            --toc-depth=3 \
+            --number-sections \
+            --metadata title="OpenAI Enterprise Billing System — Requirements Specification Report" \
+            --metadata date="$(date +%Y-%m-%d)"
+
+      - name: Build report (PDF via LaTeX)
+        continue-on-error: true
+        run: |
+          sudo apt-get install -y -qq texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra lmodern
+          cd 08-final-report
+          pandoc report.md \
+            -o "CST2310_OpenAI_Enterprise_Billing_Report.pdf" \
+            --from=gfm \
+            --to=pdf \
+            --toc \
+            --toc-depth=3 \
+            --number-sections \
+            -V geometry:margin=2.5cm \
+            -V fontsize=11pt \
+            -V mainfont="Times New Roman" \
+            --pdf-engine=pdflatex \
+            --metadata title="OpenAI Enterprise Billing System — Requirements Specification Report" \
+            --metadata date="$(date +%Y-%m-%d)"
+
+      - name: Upload DOCX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-docx
+          path: 08-final-report/CST2310_OpenAI_Enterprise_Billing_Report.docx
+          retention-days: 30
+
+      - name: Upload PDF artifact (if built)
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-pdf
+          path: 08-final-report/CST2310_OpenAI_Enterprise_Billing_Report.pdf
+          retention-days: 30
+          if-no-files-found: ignore

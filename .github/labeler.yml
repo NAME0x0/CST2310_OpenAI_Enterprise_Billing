@@ -1,0 +1,53 @@
+# Auto-label PRs based on which files are changed
+# Used by .github/workflows/auto-label.yml
+
+pm-artefact:
+  - changed-files:
+      - any-glob-to-any-file: '01-project-management/**'
+
+case-study:
+  - changed-files:
+      - any-glob-to-any-file: '02-case-study/**'
+
+uml-models:
+  - changed-files:
+      - any-glob-to-any-file: '03-uml-models/**'
+
+user-interfaces:
+  - changed-files:
+      - any-glob-to-any-file: '04-user-interfaces/**'
+
+law-ethics:
+  - changed-files:
+      - any-glob-to-any-file: '05-law-ethics/**'
+
+minutes:
+  - changed-files:
+      - any-glob-to-any-file: '06-minutes/**'
+
+assessment:
+  - changed-files:
+      - any-glob-to-any-file: '07-self-peer-assessment/**'
+
+report:
+  - changed-files:
+      - any-glob-to-any-file: '08-final-report/**'
+
+references:
+  - changed-files:
+      - any-glob-to-any-file: '09-references/**'
+
+ci-cd:
+  - changed-files:
+      - any-glob-to-any-file: '.github/**'
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'README.md'
+          - 'CONTRIBUTING.md'
+          - 'CLAUDE.md'
+
+dashboard:
+  - changed-files:
+      - any-glob-to-any-file: 'dashboard/**'

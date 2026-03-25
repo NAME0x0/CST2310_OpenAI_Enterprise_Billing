@@ -1,0 +1,40 @@
+name: Check Links
+
+on:
+  push:
+    branches: [main]
+    paths: ['**/*.md']
+  pull_request:
+    paths: ['**/*.md']
+  schedule:
+    - cron: '0 9 * * 1'  # Every Monday 9 AM UTC
+
+jobs:
+  check-links:
+    name: Verify Markdown Links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for broken links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --verbose
+            --no-progress
+            --accept 200,204,301,302,403
+            --exclude-path './node_modules'
+            --exclude-path './.git'
+            '**/*.md'
+          fail: false
+
+      - name: Post link report
+        if: always()
+        run: |
+          if [ -f lychee/out.md ]; then
+            echo "## Link Check Results" >> $GITHUB_STEP_SUMMARY
+            cat lychee/out.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## Link Check Results" >> $GITHUB_STEP_SUMMARY
+            echo "All links are valid." >> $GITHUB_STEP_SUMMARY
+          fi
