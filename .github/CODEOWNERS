@@ -1,0 +1,64 @@
+# CODEOWNERS — CST2310 OpenAI Enterprise Billing System
+# Each line maps a file pattern to one or more GitHub handles.
+# When a PR touches matching files, those owners are auto-requested for review.
+#
+# Team Members:
+#   @NAME0x0       — Afsah
+#   @JakeSajith    — Jake
+#   @Eeshitha-afk  — Eeshitha
+#   @Syed-Nihaal   — Syed
+
+# ─── Root Configs ───────────────────────────────────────────
+CLAUDE.md                          @NAME0x0
+CONTRIBUTING.md                    @NAME0x0
+README.md                          @NAME0x0
+.gitignore                         @NAME0x0
+.markdownlint.json                 @NAME0x0
+.cspell.json                       @NAME0x0
+
+# ─── Project Management ────────────────────────────────────
+01-project-management/             @NAME0x0 @Syed-Nihaal
+
+# ─── Case Study ────────────────────────────────────────────
+02-case-study/narrative.md         @NAME0x0
+02-case-study/business-case.md     @Eeshitha-afk
+02-case-study/functional-requirements.md   @JakeSajith
+02-case-study/non-functional-requirements.md @JakeSajith
+02-case-study/data-collection-methods.md    @Syed-Nihaal
+
+# ─── UML Models ────────────────────────────────────────────
+03-uml-models/use-case-diagrams.md      @NAME0x0 @JakeSajith
+03-uml-models/use-case-descriptors.md   @NAME0x0 @JakeSajith
+03-uml-models/class-diagram.md          @Syed-Nihaal
+03-uml-models/activity-diagrams.md      @Eeshitha-afk
+03-uml-models/sequence-diagrams.md      @Eeshitha-afk @Syed-Nihaal
+03-uml-models/collaboration-diagrams.md @Eeshitha-afk @Syed-Nihaal
+
+# ─── User Interfaces ──────────────────────────────────────
+04-user-interfaces/                @JakeSajith
+
+# ─── Law & Ethics ──────────────────────────────────────────
+05-law-ethics/gdpr-analysis.md     @NAME0x0
+05-law-ethics/security-analysis.md @Syed-Nihaal
+05-law-ethics/equality-analysis.md @Eeshitha-afk
+
+# ─── Meeting Minutes ──────────────────────────────────────
+06-minutes/                        @NAME0x0 @JakeSajith @Eeshitha-afk @Syed-Nihaal
+
+# ─── Self & Peer Assessment ───────────────────────────────
+07-self-peer-assessment/           @NAME0x0 @JakeSajith @Eeshitha-afk @Syed-Nihaal
+
+# ─── Final Report ─────────────────────────────────────────
+08-final-report/                   @NAME0x0
+
+# ─── References ───────────────────────────────────────────
+09-references/                     @NAME0x0
+
+# ─── Appendices ───────────────────────────────────────────
+10-appendices/                     @NAME0x0 @JakeSajith @Eeshitha-afk @Syed-Nihaal
+
+# ─── CI/CD & GitHub Config ────────────────────────────────
+.github/                           @NAME0x0
+
+# ─── Dashboard ────────────────────────────────────────────
+dashboard/                         @NAME0x0

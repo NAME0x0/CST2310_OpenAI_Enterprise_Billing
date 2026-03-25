@@ -11,35 +11,35 @@
 
 | Name | Present | Late | Absent |
 |---|---|---|---|
-| [Member 1] | | | |
-| [Member 2] | | | |
-| [Member 3] | | | |
-| [Member 4] | | | |
+| Afsah | | | |
+| Jake | | | |
+| Eeshitha | | | |
+| Syed | | | |
 | Seminar Tutor | | | |
 
 ---
 
 ## Progress Updates
 
-### [Member 1]
+### Afsah
 
 - Completed:
 - In progress:
 - Blockers:
 
-### [Member 2]
+### Jake
 
 - Completed:
 - In progress:
 - Blockers:
 
-### [Member 3]
+### Eeshitha
 
 - Completed:
 - In progress:
 - Blockers:
 
-### [Member 4]
+### Syed
 
 - Completed:
 - In progress:
@@ -115,7 +115,7 @@ Details of changes:
 
 *Student signatures:*
 
-- [Name 1]: ………………
-- [Name 2]: ………………
-- [Name 3]: ………………
-- [Name 4]: ………………
+- Afsah: ………………
+- Jake: ………………
+- Eeshitha: ………………
+- Syed: ………………

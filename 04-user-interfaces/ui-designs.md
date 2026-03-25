@@ -324,4 +324,4 @@ Each UI design is evaluated against Nielsen's 10 Usability Heuristics (Nielsen, 
 
 ## References
 
-Nielsen, J. (1994) '10 Usability Heuristics for User Interface Design', *Nielsen Norman Group*. Available at: https://www.nngroup.com/articles/ten-usability-heuristics/ (Accessed: March 2026).
+Nielsen, J. (1994) '10 Usability Heuristics for User Interface Design', *Nielsen Norman Group*. Available at: <https://www.nngroup.com/articles/ten-usability-heuristics/> (Accessed: March 2026).

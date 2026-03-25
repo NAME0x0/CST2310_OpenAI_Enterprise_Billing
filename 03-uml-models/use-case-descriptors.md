@@ -53,6 +53,7 @@
 ### Exception Flows
 
 **E1: Usage Event Processing Failure**
+
 - The system fails to process the usage event (e.g., database unavailable)
 - The event is placed in a dead-letter queue for retry
 - An audit entry is recorded with category "billing" and details of the failure
@@ -113,6 +114,7 @@
 ### Exception Flows
 
 **E1: Concurrent Modification**
+
 - Another user modifies the same department's budget simultaneously
 - The system detects the conflict via optimistic locking (version mismatch)
 - The user is asked to refresh and retry
@@ -169,6 +171,7 @@
 ### Exception Flows
 
 **E1: Key Generation Failure**
+
 - The system fails to generate a new key (e.g., cryptographic service unavailable)
 - The old key is NOT revoked (atomic operation fails entirely)
 - An error audit entry is recorded

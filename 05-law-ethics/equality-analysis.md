@@ -137,6 +137,6 @@ Accessibility is not a one-time implementation but requires ongoing effort:
 ## References
 
 - Equality Act 2010, c. 15. London: The Stationery Office.
-- W3C (2018) *Web Content Accessibility Guidelines (WCAG) 2.1*. World Wide Web Consortium. Available at: https://www.w3.org/TR/WCAG21/
+- W3C (2018) *Web Content Accessibility Guidelines (WCAG) 2.1*. World Wide Web Consortium. Available at: <https://www.w3.org/TR/WCAG21/>
 - GDS (2018) *Understanding accessibility requirements for public sector bodies*. Government Digital Service.
 - BS 8878:2010 *Web accessibility. Code of practice*. British Standards Institution.

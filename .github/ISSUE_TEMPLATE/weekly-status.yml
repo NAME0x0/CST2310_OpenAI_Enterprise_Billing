@@ -16,11 +16,15 @@ body:
     validations:
       required: true
 
-  - type: input
+  - type: dropdown
     id: member
     attributes:
       label: Team Member
-      placeholder: "Your name (@GitHubHandle)"
+      options:
+        - "Afsah (@NAME0x0)"
+        - "Jake (@JakeSajith)"
+        - "Eeshitha (@Eeshitha-afk)"
+        - "Syed (@Syed-Nihaal)"
     validations:
       required: true
 

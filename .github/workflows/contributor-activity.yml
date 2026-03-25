@@ -21,9 +21,8 @@ jobs:
           echo "| Member | GitHub | Commits | Files Changed | Lines Added | Lines Removed |" >> $GITHUB_STEP_SUMMARY
           echo "|---|---|---|---|---|---|" >> $GITHUB_STEP_SUMMARY
 
-          # Update these with actual team member GitHub handles
-          HANDLES=("Member1Handle" "Member2Handle" "Member3Handle" "Member4Handle")
-          NAMES=("Member 1" "Member 2" "Member 3" "Member 4")
+          HANDLES=("NAME0x0" "JakeSajith" "Eeshitha-afk" "Syed-Nihaal")
+          NAMES=("Afsah" "Jake" "Eeshitha" "Syed")
 
           TOTAL_COMMITS=0
 
