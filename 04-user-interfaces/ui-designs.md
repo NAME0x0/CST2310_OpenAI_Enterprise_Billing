@@ -13,31 +13,46 @@ Each UI design is evaluated against Nielsen's 10 Usability Heuristics (Nielsen, 
 
 ### Layout Description
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ [Sidebar]  │  DASHBOARD                          [Filters ▼]   │
-│            │                                                     │
-│ Dashboard  │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌────────┐│
-│ Usage      │  │Total Spend│ │ Active   │ │  Total   │ │ Active ││
-│ Models     │  │ $124,580  │ │ Depts: 6 │ │ Tokens:  │ │Alerts:3││
-│ Depts      │  │ ↑4.2%     │ │ Stable   │ │ 2.8M     │ │Review  ││
-│ Projects   │  └──────────┘ └──────────┘ └──────────┘ └────────┘│
-│ API Keys   │                                                     │
-│ Alerts     │  ┌─────────────────────┐ ┌─────────────────────────┐│
-│ Reports    │  │  Spend Over Time    │ │ Cost by Department      ││
-│ Audit      │  │  [Line Chart]       │ │ [Horizontal Bar Chart]  ││
-│ Settings   │  │                     │ │                         ││
-│            │  └─────────────────────┘ └─────────────────────────┘│
-│            │  ┌─────────────────────┐ ┌─────────────────────────┐│
-│            │  │  Usage by Model     │ │ Quota Utilisation       ││
-│            │  │  [Pie/Donut Chart]  │ │ [Progress Bars]         ││
-│            │  └─────────────────────┘ └─────────────────────────┘│
-│            │                                                     │
-│            │  ┌──────────┐ ┌──────────┐ ┌──────────┐ ┌────────┐│
-│            │  │Energy Use│ │CO2 Impact│ │PUE Ratio │ │Renewble││
-│            │  │  142 kWh │ │  55 kg   │ │  1.10    │ │  78%   ││
-│            │  └──────────┘ └──────────┘ └──────────┘ └────────┘│
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+block-beta
+    columns 5
+
+    block:nav:1
+        columns 1
+        space
+        n1["Dashboard"]
+        n2["Usage"]
+        n3["Models"]
+        n4["Departments"]
+        n5["Projects"]
+        n6["API Keys"]
+        n7["Alerts"]
+        n8["Reports"]
+        n9["Audit"]
+        n10["Settings"]
+    end
+
+    block:content:4
+        columns 4
+        kpi1["Total Spend<br>$124,580 ↑4.2%"]
+        kpi2["Active Depts<br>6"]
+        kpi3["Total Tokens<br>2.8M"]
+        kpi4["Active Alerts<br>3"]
+        chart1["Spend Over Time<br>(Line Chart)"]:2
+        chart2["Cost by Department<br>(Bar Chart)"]:2
+        chart3["Usage by Model<br>(Donut Chart)"]:2
+        chart4["Quota Utilisation<br>(Progress Bars)"]:2
+        env1["Energy<br>142 kWh"]
+        env2["CO₂<br>55 kg"]
+        env3["PUE<br>1.10"]
+        env4["Renewable<br>78%"]
+    end
+
+    style n1 fill:#3498db,color:#fff
+    style kpi1 fill:#1a1a2e,color:#fff
+    style kpi2 fill:#1a1a2e,color:#fff
+    style kpi3 fill:#1a1a2e,color:#fff
+    style kpi4 fill:#1a1a2e,color:#fff
 ```
 
 ### Nielsen's Heuristics Evaluation
@@ -64,31 +79,45 @@ Each UI design is evaluated against Nielsen's 10 Usability Heuristics (Nielsen, 
 
 ### Layout Description
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ DEPARTMENTS                                     [+ New Dept]    │
-│                                                                  │
-│ ┌────────────────────────────────────────────────────────────┐  │
-│ │ Name          │ Budget    │ Spent     │ Utilisation │ Action│  │
-│ │───────────────┼──────────┼──────────┼────────────┼───────│  │
-│ │ Engineering   │ £50,000  │ £42,000  │ ████████░░ 84% │ Edit│  │
-│ │ Marketing     │ £30,000  │ £28,500  │ █████████░ 95% │ Edit│  │
-│ │ Research      │ £25,000  │ £12,000  │ █████░░░░░ 48% │ Edit│  │
-│ │ Support       │ £15,000  │ £11,200  │ ███████░░░ 75% │ Edit│  │
-│ │ Legal         │ £10,000  │ £3,200   │ ███░░░░░░░ 32% │ Edit│  │
-│ │ HR            │ £8,000   │ £4,100   │ █████░░░░░ 51% │ Edit│  │
-│ └────────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│ ┌─── Edit Budget Modal ──────────────────────────────────────┐  │
-│ │ Department: Marketing                                       │  │
-│ │ Current Budget: £30,000    Current Spend: £28,500           │  │
-│ │                                                             │  │
-│ │ New Budget: [£___________]                                  │  │
-│ │ ⚠ Budget must be ≥ current spend (£28,500)                 │  │
-│ │                                                             │  │
-│ │                              [Cancel]  [Save Changes]       │  │
-│ └─────────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+block-beta
+    columns 5
+
+    block:header:5
+        columns 5
+        h1["DEPARTMENTS"]:4
+        addBtn["+ New Dept"]
+    end
+
+    block:table:5
+        columns 5
+        thName["Name"] thBudget["Budget"] thSpent["Spent"] thUtil["Utilisation"] thAct["Action"]
+        r1a["Engineering"] r1b["£50,000"] r1c["£42,000"] r1d["84%"] r1e["Edit"]
+        r2a["Marketing"] r2b["£30,000"] r2c["£28,500"] r2d["95%"] r2e["Edit"]
+        r3a["Research"] r3b["£25,000"] r3c["£12,000"] r3d["48%"] r3e["Edit"]
+        r4a["Support"] r4b["£15,000"] r4c["£11,200"] r4d["75%"] r4e["Edit"]
+        r5a["Legal"] r5b["£10,000"] r5c["£3,200"] r5d["32%"] r5e["Edit"]
+        r6a["HR"] r6b["£8,000"] r6c["£4,100"] r6d["51%"] r6e["Edit"]
+    end
+
+    block:modal:5
+        columns 3
+        mh["Edit Budget — Marketing"]:3
+        ml1["Current Budget: £30,000"] ml2["Current Spend: £28,500"] space
+        ml3["New Budget: [£________]"]:2 space
+        mw["Warning: Budget must be ≥ current spend (£28,500)"]:3
+        space cancelBtn["Cancel"] saveBtn["Save Changes"]
+    end
+
+    style thName fill:#2c3e50,color:#fff
+    style thBudget fill:#2c3e50,color:#fff
+    style thSpent fill:#2c3e50,color:#fff
+    style thUtil fill:#2c3e50,color:#fff
+    style thAct fill:#2c3e50,color:#fff
+    style r2d fill:#e74c3c,color:#fff
+    style r1d fill:#e67e22,color:#fff
+    style mw fill:#f39c12,color:#000
+    style saveBtn fill:#2ecc71,color:#fff
 ```
 
 ### Nielsen's Heuristics Evaluation
@@ -115,30 +144,50 @@ Each UI design is evaluated against Nielsen's 10 Usability Heuristics (Nielsen, 
 
 ### Layout Description
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ API KEYS                                        [+ Create Key]  │
-│                                                                  │
-│ [All ▼] [Active ▼] [Department ▼]                  [Search...]  │
-│                                                                  │
-│ ┌────────────────────────────────────────────────────────────┐  │
-│ │ Name         │ Key          │ Dept      │ Status  │ Actions│  │
-│ │──────────────┼─────────────┼──────────┼────────┼────────│  │
-│ │ prod-main    │ sk-...a3f2  │ Engineer │ ● Active│ ⟳ ✕   │  │
-│ │ staging      │ sk-...b7c1  │ Engineer │ ● Active│ ⟳ ✕   │  │
-│ │ analytics    │ sk-...d4e8  │ Research │ ● Active│ ⟳ ✕   │  │
-│ │ old-prod     │ sk-...f1a9  │ Engineer │ ○ Revoked│ —     │  │
-│ │ test-key     │ sk-...c2d3  │ Support  │ ◌ Expired│ —     │  │
-│ └────────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│ Key Details (selected: prod-main)                                │
-│ ┌────────────────────────────────────────────────────────────┐  │
-│ │ Created: 15 Jan 2026   Last Used: 2 hours ago              │  │
-│ │ Permissions: chat, embeddings, fine-tuning                  │  │
-│ │ Department: Engineering   Key Age: 69 days                  │  │
-│ │ ⚠ Key rotation due in 21 days (90-day policy)              │  │
-│ └────────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+block-beta
+    columns 5
+
+    block:header:5
+        columns 5
+        h1["API KEYS"]:4
+        createBtn["+ Create Key"]
+    end
+
+    block:filters:5
+        columns 4
+        f1["All Types ▼"] f2["Active ▼"] f3["Department ▼"] f4["Search..."]
+    end
+
+    block:table:5
+        columns 5
+        thName["Name"] thKey["Key"] thDept["Dept"] thStatus["Status"] thAct["Actions"]
+        r1a["prod-main"] r1b["sk-...a3f2"] r1c["Engineering"] r1d["Active"] r1e["Rotate Revoke"]
+        r2a["staging"] r2b["sk-...b7c1"] r2c["Engineering"] r2d["Active"] r2e["Rotate Revoke"]
+        r3a["analytics"] r3b["sk-...d4e8"] r3c["Research"] r3d["Active"] r3e["Rotate Revoke"]
+        r4a["old-prod"] r4b["sk-...f1a9"] r4c["Engineering"] r4d["Revoked"] r4e["—"]
+        r5a["test-key"] r5b["sk-...c2d3"] r5c["Support"] r5d["Expired"] r5e["—"]
+    end
+
+    block:detail:5
+        columns 3
+        dh["Key Details — prod-main"]:3
+        d1["Created: 15 Jan 2026"] d2["Last Used: 2 hours ago"] d3["Key Age: 69 days"]
+        d4["Permissions: chat, embeddings, fine-tuning"]:2 d5["Dept: Engineering"]
+        dw["Rotation due in 21 days (90-day policy)"]:3
+    end
+
+    style thName fill:#2c3e50,color:#fff
+    style thKey fill:#2c3e50,color:#fff
+    style thDept fill:#2c3e50,color:#fff
+    style thStatus fill:#2c3e50,color:#fff
+    style thAct fill:#2c3e50,color:#fff
+    style r1d fill:#2ecc71,color:#fff
+    style r2d fill:#2ecc71,color:#fff
+    style r3d fill:#2ecc71,color:#fff
+    style r4d fill:#95a5a6,color:#fff
+    style r5d fill:#95a5a6,color:#fff
+    style dw fill:#f39c12,color:#000
 ```
 
 ### Nielsen's Heuristics Evaluation
@@ -165,29 +214,53 @@ Each UI design is evaluated against Nielsen's 10 Usability Heuristics (Nielsen, 
 
 ### Layout Description
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ ALERTS                                    3 unacknowledged       │
-│                                                                  │
-│ [All Types ▼] [All Severity ▼] [Unacknowledged ▼]   [Search]   │
-│                                                                  │
-│ ┌─ CRITICAL ─────────────────────────────────────────────────┐  │
-│ │ ⚠ Unusual API usage detected on key sk-...a3f2            │  │
-│ │   Security · Engineering · 2 hours ago        [Acknowledge]│  │
-│ └────────────────────────────────────────────────────────────┘  │
-│ ┌─ WARNING ──────────────────────────────────────────────────┐  │
-│ │ △ Marketing department at 95% budget utilisation           │  │
-│ │   Quota · Marketing · 5 hours ago             [Acknowledge]│  │
-│ └────────────────────────────────────────────────────────────┘  │
-│ ┌─ INFO ─────────────────────────────────────────────────────┐  │
-│ │ ℹ Monthly billing report ready for download                │  │
-│ │   Billing · System · 1 day ago                [Acknowledge]│  │
-│ └────────────────────────────────────────────────────────────┘  │
-│ ┌─ ACKNOWLEDGED ─────────────────────────────────────────────┐  │
-│ │ ✓ Research department exceeded 80% threshold               │  │
-│ │   Quota · Research · 3 days ago · Ack by: Admin            │  │
-│ └────────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+block-beta
+    columns 4
+
+    block:header:4
+        columns 4
+        h1["ALERTS"]:3
+        badge["3 unacknowledged"]
+    end
+
+    block:filters:4
+        columns 4
+        f1["All Types ▼"] f2["All Severity ▼"] f3["Unacknowledged ▼"] f4["Search..."]
+    end
+
+    block:critical:4
+        columns 4
+        c1["CRITICAL: Unusual API usage detected on key sk-...a3f2"]:3
+        cBtn["Acknowledge"]
+        c2["Security · Engineering · 2 hours ago"]:4
+    end
+
+    block:warning:4
+        columns 4
+        w1["WARNING: Marketing department at 95% budget utilisation"]:3
+        wBtn["Acknowledge"]
+        w2["Quota · Marketing · 5 hours ago"]:4
+    end
+
+    block:info:4
+        columns 4
+        i1["INFO: Monthly billing report ready for download"]:3
+        iBtn["Acknowledge"]
+        i2["Billing · System · 1 day ago"]:4
+    end
+
+    block:ack:4
+        columns 4
+        a1["ACKNOWLEDGED: Research department exceeded 80% threshold"]:4
+        a2["Quota · Research · 3 days ago · Acknowledged by: Admin"]:4
+    end
+
+    style critical fill:#e74c3c,color:#fff,stroke:#c0392b
+    style warning fill:#f39c12,color:#000,stroke:#e67e22
+    style info fill:#3498db,color:#fff,stroke:#2980b9
+    style ack fill:#95a5a6,color:#fff,stroke:#7f8c8d
+    style badge fill:#e74c3c,color:#fff
 ```
 
 ### Nielsen's Heuristics Evaluation
@@ -214,32 +287,57 @@ Each UI design is evaluated against Nielsen's 10 Usability Heuristics (Nielsen, 
 
 ### Layout Description
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ REPORTS                                                          │
-│                                                                  │
-│ Period: [01/03/2026] to [31/03/2026]  Dept: [All ▼]            │
-│ Model: [All ▼]                        [Generate Report]         │
-│                                                                  │
-│ ┌─ Summary ──────────────────────────────────────────────────┐  │
-│ │ Total Spend: £24,580  │ Total Tokens: 1.2M  │ Records: 847│  │
-│ └────────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│ ┌─ Spend by Department ──────────────────────────────────────┐  │
-│ │ [Horizontal stacked bar chart]                              │  │
-│ └────────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│ ┌─ Spend by Model ──────────────────────────────────────────┐  │
-│ │ [Donut chart with legend]                                   │  │
-│ └────────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│ ┌─ Detailed Records ────────────────────────────────────────┐  │
-│ │ Date  │ Dept  │ Model    │ Tokens  │ Cost    │ Project    │  │
-│ │ ...   │ ...   │ ...      │ ...     │ ...     │ ...        │  │
-│ └────────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│                                           [Export CSV] [Print]   │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+block-beta
+    columns 4
+
+    block:header:4
+        columns 1
+        h1["REPORTS"]
+    end
+
+    block:filters:4
+        columns 4
+        f1["Period: 01/03/2026"] f2["to: 31/03/2026"] f3["Dept: All ▼"] f4["Generate Report"]
+    end
+
+    block:summary:4
+        columns 3
+        s1["Total Spend<br>£24,580"]
+        s2["Total Tokens<br>1.2M"]
+        s3["Records<br>847"]
+    end
+
+    block:charts:4
+        columns 2
+        ch1["Spend by Department<br>(Stacked Bar Chart)"]
+        ch2["Spend by Model<br>(Donut Chart)"]
+    end
+
+    block:records:4
+        columns 6
+        rh1["Date"] rh2["Dept"] rh3["Model"] rh4["Tokens"] rh5["Cost"] rh6["Project"]
+        rd1["25/03"] rd2["Engineering"] rd3["GPT-4o"] rd4["12,400"] rd5["£4.80"] rd6["Chatbot"]
+        rd7["25/03"] rd8["Marketing"] rd9["GPT-4.5"] rd10["8,200"] rd11["£6.10"] rd12["Content"]
+    end
+
+    block:actions:4
+        columns 4
+        space:2
+        exportBtn["Export CSV"]
+        printBtn["Print"]
+    end
+
+    style s1 fill:#1a1a2e,color:#fff
+    style s2 fill:#1a1a2e,color:#fff
+    style s3 fill:#1a1a2e,color:#fff
+    style rh1 fill:#2c3e50,color:#fff
+    style rh2 fill:#2c3e50,color:#fff
+    style rh3 fill:#2c3e50,color:#fff
+    style rh4 fill:#2c3e50,color:#fff
+    style rh5 fill:#2c3e50,color:#fff
+    style rh6 fill:#2c3e50,color:#fff
+    style f4 fill:#3498db,color:#fff
 ```
 
 ### Nielsen's Heuristics Evaluation
@@ -266,33 +364,51 @@ Each UI design is evaluated against Nielsen's 10 Usability Heuristics (Nielsen, 
 
 ### Layout Description
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│ AUDIT TRAIL                                    12,847 entries    │
-│                                                                  │
-│ [All Categories ▼] [Date Range: ____] [Actor: ____] [Search..] │
-│                                                                  │
-│ ┌────────────────────────────────────────────────────────────┐  │
-│ │ Timestamp        │ Action           │ Actor  │ Category    │  │
-│ │──────────────────┼─────────────────┼───────┼────────────│  │
-│ │ 25/03 14:22:01  │ budget_updated   │ admin  │ ● billing  │  │
-│ │ 25/03 14:18:45  │ alert_ack        │ mgr    │ ● security │  │
-│ │ 25/03 14:15:30  │ key_rotated      │ admin  │ ● security │  │
-│ │ 25/03 14:12:00  │ settings_updated │ admin  │ ● config   │  │
-│ │ 25/03 14:05:22  │ report_generated │ finance│ ● billing  │  │
-│ └────────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│ ┌─ Entry Detail (expanded) ──────────────────────────────────┐  │
-│ │ Action: budget_updated                                      │  │
-│ │ Actor: admin (admin@company.com)                            │  │
-│ │ Target: Department: Marketing                               │  │
-│ │ Timestamp: 25/03/2026 14:22:01 UTC                         │  │
-│ │ Details: Budget changed from £30,000 to £75,000            │  │
-│ │ Category: billing                                           │  │
-│ └────────────────────────────────────────────────────────────┘  │
-│                                                                  │
-│                                    [Export Audit Report]         │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+block-beta
+    columns 4
+
+    block:header:4
+        columns 4
+        h1["AUDIT TRAIL"]:3
+        badge["12,847 entries"]
+    end
+
+    block:filters:4
+        columns 4
+        f1["All Categories ▼"] f2["Date Range"] f3["Actor"] f4["Search..."]
+    end
+
+    block:table:4
+        columns 4
+        thTime["Timestamp"] thAction["Action"] thActor["Actor"] thCat["Category"]
+        r1a["25/03 14:22:01"] r1b["budget_updated"] r1c["admin"] r1d["billing"]
+        r2a["25/03 14:18:45"] r2b["alert_ack"] r2c["mgr"] r2d["security"]
+        r3a["25/03 14:15:30"] r3b["key_rotated"] r3c["admin"] r3d["security"]
+        r4a["25/03 14:12:00"] r4b["settings_updated"] r4c["admin"] r4d["config"]
+        r5a["25/03 14:05:22"] r5b["report_generated"] r5c["finance"] r5d["billing"]
+    end
+
+    block:detail:4
+        columns 2
+        dh["Entry Detail — budget_updated"]:2
+        d1["Action: budget_updated"] d2["Actor: admin (admin@company.com)"]
+        d3["Target: Department: Marketing"] d4["Timestamp: 25/03/2026 14:22:01 UTC"]
+        d5["Details: Budget changed from £30,000 to £75,000"] d6["Category: billing"]
+    end
+
+    block:actions:4
+        columns 4
+        space:3
+        exportBtn["Export Audit Report"]
+    end
+
+    style thTime fill:#2c3e50,color:#fff
+    style thAction fill:#2c3e50,color:#fff
+    style thActor fill:#2c3e50,color:#fff
+    style thCat fill:#2c3e50,color:#fff
+    style badge fill:#3498db,color:#fff
+    style detail fill:#1a1a2e,color:#fff
 ```
 
 ### Nielsen's Heuristics Evaluation

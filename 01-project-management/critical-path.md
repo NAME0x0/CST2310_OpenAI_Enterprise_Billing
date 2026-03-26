@@ -12,37 +12,27 @@
 The critical path is the longest sequence of dependent activities that determines the minimum project duration. Any delay to a critical-path activity directly delays the submission date.
 
 ```mermaid
-graph LR
-    A1.1["A1.1 PID"] --> A2.2["A2.2 WBS"]
-    A2.2 --> A2.3["A2.3 Gantt"]
-    A2.3 --> A3.1["A3.1 Narrative"]
-    A3.1 --> A3.3["A3.3 Func. Reqs"]
-    A3.3 --> A4.1["A4.1 UCD: Billing"]
-    A4.1 --> A5.1["A5.1 UC Desc: Record Usage"]
-    A5.1 --> A7.1["A7.1 AD: Usage Recording"]
-    A7.1 --> A8.1["A8.1 SD: API Call"]
-    A8.1 --> A12.4["A12.4 Write UML Chapter"]
-    A12.4 --> A12.8["A12.8 Peer Review"]
-    A12.8 --> A12.9["A12.9 Formatting"]
-    A12.9 --> A13.1["A13.1 Slides"]
-    A13.1 --> A13.3["A13.3 Rehearsal"]
-    A13.3 --> A13.4["A13.4 Delivery"]
+graph TD
+    subgraph P1["Planning"]
+        direction LR
+        a11["A1.1 PID"] --> a22["A2.2 WBS"] --> a23["A2.3 Gantt"] --> a31["A3.1 Narrative"] --> a33["A3.3 Func. Reqs"]
+    end
 
-    style A1.1 fill:#e74c3c,color:#fff
-    style A2.2 fill:#e74c3c,color:#fff
-    style A2.3 fill:#e74c3c,color:#fff
-    style A3.1 fill:#e74c3c,color:#fff
-    style A3.3 fill:#e74c3c,color:#fff
-    style A4.1 fill:#e74c3c,color:#fff
-    style A5.1 fill:#e74c3c,color:#fff
-    style A7.1 fill:#e74c3c,color:#fff
-    style A8.1 fill:#e74c3c,color:#fff
-    style A12.4 fill:#e74c3c,color:#fff
-    style A12.8 fill:#e74c3c,color:#fff
-    style A12.9 fill:#e74c3c,color:#fff
-    style A13.1 fill:#e74c3c,color:#fff
-    style A13.3 fill:#e74c3c,color:#fff
-    style A13.4 fill:#e74c3c,color:#fff
+    subgraph P2["Analysis & Modelling"]
+        direction LR
+        a41["A4.1 UCD: Billing"] --> a51["A5.1 UC Desc: Record Usage"] --> a71["A7.1 AD: Usage Recording"] --> a81["A8.1 SD: API Call"]
+    end
+
+    subgraph P3["Report & Delivery"]
+        direction LR
+        a124["A12.4 Write UML Chapter"] --> a128["A12.8 Peer Review"] --> a129["A12.9 Formatting"] --> a133["A13.3 Rehearsal"] --> a134["A13.4 Delivery"]
+    end
+
+    a33 --> a41
+    a81 --> a124
+
+    classDef crit fill:#e74c3c,color:#fff,stroke:#c0392b
+    class a11,a22,a23,a31,a33,a41,a51,a71,a81,a124,a128,a129,a133,a134 crit
 ```
 
 ---
@@ -98,49 +88,26 @@ graph LR
 
 ```mermaid
 graph TD
-    subgraph Row1["Planning"]
-        A1.1["A1.1 PID<br><i>2 days</i>"]
-        A2.2["A2.2 WBS<br><i>2 days</i>"]
-        A2.3["A2.3 Gantt<br><i>2 days</i>"]
-        A2.5["A2.5 Crit. Path<br><i>1 day</i>"]
-        A3.1["A3.1 Narrative<br><i>3 days</i>"]
+    subgraph P1["Phase 1: Planning"]
+        direction LR
+        b11["A1.1 PID<br><i>2 days</i>"] --> b22["A2.2 WBS<br><i>2 days</i>"] --> b23["A2.3 Gantt<br><i>2 days</i>"] --> b25["A2.5 Crit. Path<br><i>1 day</i>"] --> b31["A3.1 Narrative<br><i>3 days</i>"]
     end
 
-    subgraph Row2["Analysis & Modelling"]
-        A3.3["A3.3 Func. Reqs<br><i>3 days</i>"]
-        A4.1["A4.1 UCD: Billing<br><i>2 days</i>"]
-        A5.1["A5.1 UC Desc: Record<br><i>1 day</i>"]
-        A7.1["A7.1 AD: Usage<br><i>2 days</i>"]
-        A8.1["A8.1 SD: API Call<br><i>2 days</i>"]
+    subgraph P2["Phase 2: Analysis & Modelling"]
+        direction LR
+        b33["A3.3 Func. Reqs<br><i>3 days</i>"] --> b41["A4.1 UCD: Billing<br><i>2 days</i>"] --> b51["A5.1 UC Desc<br><i>1 day</i>"] --> b71["A7.1 AD: Usage<br><i>2 days</i>"] --> b81["A8.1 SD: API Call<br><i>2 days</i>"]
     end
 
-    subgraph Row3["Report & Delivery"]
-        A12.4["A12.4 Write UML Chapter<br><i>2 days</i>"]
-        A12.8["A12.8 Peer Review<br><i>1 day</i>"]
-        A12.9["A12.9 Format & Proofread<br><i>2 days</i>"]
-        A13.3["A13.3 Rehearsal<br><i>1 day</i>"]
-        A13.4["A13.4 Final Delivery<br><i>1 day</i>"]
+    subgraph P3["Phase 3: Report & Delivery"]
+        direction LR
+        b124["A12.4 Write UML<br><i>2 days</i>"] --> b128["A12.8 Peer Review<br><i>1 day</i>"] --> b129["A12.9 Format<br><i>2 days</i>"] --> b133["A13.3 Rehearsal<br><i>1 day</i>"] --> b134["A13.4 Delivery<br><i>1 day</i>"]
     end
 
-    A1.1 --> A2.2 --> A2.3 --> A2.5 --> A3.1
-    A3.1 --> A3.3 --> A4.1 --> A5.1 --> A7.1 --> A8.1
-    A8.1 --> A12.4 --> A12.8 --> A12.9 --> A13.3 --> A13.4
+    b31 --> b33
+    b81 --> b124
 
-    style A1.1 fill:#e74c3c,color:#fff
-    style A2.2 fill:#e74c3c,color:#fff
-    style A2.3 fill:#e74c3c,color:#fff
-    style A2.5 fill:#e74c3c,color:#fff
-    style A3.1 fill:#e74c3c,color:#fff
-    style A3.3 fill:#e74c3c,color:#fff
-    style A4.1 fill:#e74c3c,color:#fff
-    style A5.1 fill:#e74c3c,color:#fff
-    style A7.1 fill:#e74c3c,color:#fff
-    style A8.1 fill:#e74c3c,color:#fff
-    style A12.4 fill:#e74c3c,color:#fff
-    style A12.8 fill:#e74c3c,color:#fff
-    style A12.9 fill:#e74c3c,color:#fff
-    style A13.3 fill:#e74c3c,color:#fff
-    style A13.4 fill:#e74c3c,color:#fff
+    classDef crit fill:#e74c3c,color:#fff,stroke:#c0392b
+    class b11,b22,b23,b25,b31,b33,b41,b51,b71,b81,b124,b128,b129,b133,b134 crit
 ```
 
 ---
