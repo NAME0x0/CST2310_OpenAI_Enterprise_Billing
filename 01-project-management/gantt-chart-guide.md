@@ -98,33 +98,27 @@ Summary (parent) rows are **bold**; their children are indented beneath them.
 ## Key Dependencies (Critical Path)
 
 ```mermaid
-graph LR
-    AL["Activity List"] --> WBS
-    WBS --> Gantt
-    Gantt --> CP["Critical Path"]
-    CP --> CSN["Case Study Narrative"]
-    CSN --> FR["Functional Requirements"]
-    FR --> UCD["Use Case Diagrams"]
-    UCD --> UCD2["Use Case Descriptors"]
-    UCD2 --> SAD["Sequence / Activity Diagrams"]
-    SAD --> RC["Report Chapters"]
-    RC --> PR["Peer Review"]
-    PR --> FMT["Formatting"]
-    FMT --> SUB["Submission"]
+graph TD
+    subgraph P1["Planning"]
+        direction LR
+        AL["Activity List"] --> WBS --> Gantt --> CP["Critical Path"]
+    end
 
-    style AL fill:#e74c3c,color:#fff
-    style WBS fill:#e74c3c,color:#fff
-    style Gantt fill:#e74c3c,color:#fff
-    style CP fill:#e74c3c,color:#fff
-    style CSN fill:#e74c3c,color:#fff
-    style FR fill:#e74c3c,color:#fff
-    style UCD fill:#e74c3c,color:#fff
-    style UCD2 fill:#e74c3c,color:#fff
-    style SAD fill:#e74c3c,color:#fff
-    style RC fill:#e74c3c,color:#fff
-    style PR fill:#e74c3c,color:#fff
-    style FMT fill:#e74c3c,color:#fff
-    style SUB fill:#e74c3c,color:#fff
+    subgraph P2["Analysis"]
+        direction LR
+        CSN["Case Study Narrative"] --> FR["Functional Requirements"] --> UCD["Use Case Diagrams"] --> UCD2["Use Case Descriptors"]
+    end
+
+    subgraph P3["Delivery"]
+        direction LR
+        SAD["Sequence / Activity Diagrams"] --> RC["Report Chapters"] --> PR["Peer Review"] --> FMT["Formatting"] --> SUB["Submission"]
+    end
+
+    CP --> CSN
+    UCD2 --> SAD
+
+    classDef crit fill:#e74c3c,color:#fff,stroke:#c0392b
+    class AL,WBS,Gantt,CP,CSN,FR,UCD,UCD2,SAD,RC,PR,FMT,SUB crit
 ```
 
 Any delay on this chain directly delays the submission date. Tasks off the critical path (e.g., non-functional requirements, law & ethics) have float.
