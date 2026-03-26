@@ -3,8 +3,8 @@
 ## OpenAI Enterprise Billing System — CST2310
 
 **Version:** 1.0
-**Date:** [Week 7 Date]
-**Last Updated:** [Date]
+**Date:** 17th March, 2026
+**Last Updated:** 26th March, 2026
 
 ---
 
