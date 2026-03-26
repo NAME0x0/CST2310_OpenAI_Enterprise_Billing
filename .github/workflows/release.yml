@@ -9,18 +9,15 @@ permissions:
   contents: write
 
 jobs:
-  release:
-    name: Build & Publish Release
+  build:
+    name: Build Report Artefacts
     runs-on: ubuntu-latest
+    container:
+      image: pandoc/extra:latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Install Pandoc & LaTeX
-        run: |
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq pandoc texlive-latex-recommended texlive-fonts-recommended texlive-latex-extra lmodern
 
       - name: Extract version from tag
         id: version
@@ -40,7 +37,6 @@ jobs:
             --metadata date="$(date +%Y-%m-%d)"
 
       - name: Build report (PDF)
-        continue-on-error: true
         run: |
           cd 08-final-report
           pandoc report.md \
@@ -52,17 +48,41 @@ jobs:
             --number-sections \
             -V geometry:margin=2.5cm \
             -V fontsize=11pt \
-            --pdf-engine=pdflatex \
+            --pdf-engine=xelatex \
             --metadata title="OpenAI Enterprise Billing System — Requirements Specification Report" \
             --metadata date="$(date +%Y-%m-%d)"
+
+      - name: Upload build artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-files
+          path: |
+            08-final-report/CST2310_Report_${{ steps.version.outputs.tag }}.docx
+            08-final-report/CST2310_Report_${{ steps.version.outputs.tag }}.pdf
+
+  release:
+    name: Publish GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Extract version from tag
+        id: version
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+
+      - name: Download build artefacts
+        uses: actions/download-artifact@v4
+        with:
+          name: release-files
+          path: release
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
           files: |
-            08-final-report/CST2310_Report_${{ steps.version.outputs.tag }}.docx
-            08-final-report/CST2310_Report_${{ steps.version.outputs.tag }}.pdf
+            release/08-final-report/CST2310_Report_${{ steps.version.outputs.tag }}.docx
+            release/08-final-report/CST2310_Report_${{ steps.version.outputs.tag }}.pdf
           body: |
             ## OpenAI Enterprise Billing System Report — ${{ steps.version.outputs.tag }}
 
