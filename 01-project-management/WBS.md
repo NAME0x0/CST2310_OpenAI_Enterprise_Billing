@@ -3,8 +3,73 @@
 ## OpenAI Enterprise Billing System — CST2310
 
 **Version:** 1.0
-**Date:** [Week 7 Date]
+**Date:** 9 March 2026
 **Methodology:** Unified Process
+
+---
+
+## WBS Hierarchy Diagram
+
+```mermaid
+graph TD
+    ROOT["1.0 OpenAI Enterprise<br>Billing System Analysis"]
+
+    ROOT --> PM["1.1 Project<br>Management"]
+    ROOT --> CS["1.2 Case Study<br>Analysis"]
+    ROOT --> UML["1.3 UML Schematic<br>Models"]
+    ROOT --> UI["1.4 User Interface<br>Design"]
+    ROOT --> LE["1.5 Law and<br>Ethics"]
+    ROOT --> RP["1.6 Report<br>Production"]
+    ROOT --> PR["1.7 Presentation"]
+
+    PM --> PM1["1.1.1 Activity List"]
+    PM --> PM2["1.1.2 WBS"]
+    PM --> PM3["1.1.3 Gantt Chart"]
+    PM --> PM4["1.1.4 Risk Matrix"]
+    PM --> PM5["1.1.5 Critical Path"]
+    PM --> PM6["1.1.6 Meeting Minutes"]
+    PM --> PM7["1.1.7 Self/Peer Assessment"]
+
+    CS --> CS1["1.2.1 Narrative"]
+    CS --> CS2["1.2.2 Business Case"]
+    CS --> CS3["1.2.3 Functional Reqs"]
+    CS --> CS4["1.2.4 Non-Functional Reqs"]
+    CS --> CS5["1.2.5 System Actors"]
+    CS --> CS6["1.2.6 Data Collection"]
+
+    UML --> UML1["1.3.1 Use Case Diagrams"]
+    UML --> UML2["1.3.2 Use Case Descriptors"]
+    UML --> UML3["1.3.3 Class Diagram"]
+    UML --> UML4["1.3.4 ERD"]
+    UML --> UML5["1.3.5 Activity Diagrams"]
+    UML --> UML6["1.3.6 Sequence Diagrams"]
+    UML --> UML7["1.3.7 Collaboration Diagrams"]
+
+    UI --> UI1["1.4.1–1.4.6 Six UI Designs"]
+    UI --> UI2["1.4.7 Nielsen's Heuristics"]
+
+    LE --> LE1["1.5.1 GDPR Analysis"]
+    LE --> LE2["1.5.2 Security Analysis"]
+    LE --> LE3["1.5.3 Equality Analysis"]
+
+    RP --> RP1["1.6.1–1.6.7 Chapters"]
+    RP --> RP2["1.6.10 Peer Review"]
+    RP --> RP3["1.6.11 Formatting & TOC"]
+
+    PR --> PR1["1.7.1 Slide Design"]
+    PR --> PR2["1.7.2 Visual Aids"]
+    PR --> PR3["1.7.3 Rehearsal"]
+    PR --> PR4["1.7.4 Final Delivery"]
+
+    style ROOT fill:#2c3e50,color:#fff
+    style PM fill:#e74c3c,color:#fff
+    style CS fill:#e67e22,color:#fff
+    style UML fill:#2ecc71,color:#fff
+    style UI fill:#3498db,color:#fff
+    style LE fill:#9b59b6,color:#fff
+    style RP fill:#1abc9c,color:#fff
+    style PR fill:#f39c12,color:#fff
+```
 
 ---
 
@@ -175,19 +240,19 @@
 | 1.1.1 | Activity List | Comprehensive task list with durations and dependencies | Afsah | Week 7 |
 | 1.1.2 | WBS | This document; hierarchical deliverables breakdown | Syed | Week 7 |
 | 1.1.3 | Gantt Chart | Scheduled timeline with dependencies and milestones | Afsah | Week 8 |
-| 1.1.4 | Risk Matrix | 9–10 risks with mitigations and contingency plans | [Member 3] | Week 8 |
+| 1.1.4 | Risk Matrix | 9–10 risks with mitigations and contingency plans | Jake | Week 8 |
 | 1.1.5 | Critical Path | Zero-float activity analysis with slack calculations | Afsah | Week 8 |
 | 1.2.1 | Case Study Narrative | System background, problems, proposed solution, BIS classification | Afsah | Week 8 |
 | 1.2.2 | Business Case | Problem, solution, benefits, costs, ROI, KPIs | Syed | Week 8 |
-| 1.2.3 | Functional Requirements | 15–20 FRs with MoSCoW prioritisation | [Member 3] | Week 9 |
-| 1.2.4 | Non-Functional Requirements | 10–15 NFRs across quality categories | [Member 4] | Week 9 |
+| 1.2.3 | Functional Requirements | 15–20 FRs with MoSCoW prioritisation | Jake | Week 9 |
+| 1.2.4 | Non-Functional Requirements | 10–15 NFRs across quality categories | Eeshitha | Week 9 |
 | 1.2.6 | Data Collection Methods | 4–5 elicitation techniques documented | Syed | Week 9 |
-| 1.3.1 | Use Case Diagrams | 4–6 UCDs with actors and relationships | [Member 3] | Week 10 |
+| 1.3.1 | Use Case Diagrams | 4–6 UCDs with actors and relationships | Jake | Week 10 |
 | 1.3.2 | Use Case Descriptors | 4–6 fully dressed descriptors | Syed | Week 10 |
 | 1.3.3–4 | Class Diagram + ERD | Complete domain model with ERD | Syed | Week 10 |
-| 1.3.5 | Activity Diagrams | 4–6 ADs with swim lanes | [Member 3] | Week 11 |
-| 1.3.6 | Sequence Diagrams | 4–6 SDs with fragments | [Member 4] | Week 11 |
-| 1.3.7 | Collaboration Diagrams | 4–6 CDs corresponding to SDs | [Member 4] | Week 11 |
+| 1.3.5 | Activity Diagrams | 4–6 ADs with swim lanes | Jake | Week 11 |
+| 1.3.6 | Sequence Diagrams | 4–6 SDs with fragments | Eeshitha | Week 11 |
+| 1.3.7 | Collaboration Diagrams | 4–6 CDs corresponding to SDs | Eeshitha | Week 11 |
 | 1.4 | User Interface Designs | 4–6 UIs with Nielsen's Heuristics | Afsah | Week 11 |
 | 1.5 | Law and Ethics | GDPR, security, equality analysis | All | Week 11 |
 | 1.6 | Report Production | All chapters assembled, reviewed, formatted | All | Week 12 |

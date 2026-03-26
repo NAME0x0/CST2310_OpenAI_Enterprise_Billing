@@ -97,12 +97,34 @@ Summary (parent) rows are **bold**; their children are indented beneath them.
 
 ## Key Dependencies (Critical Path)
 
-```
-Activity List → WBS → Gantt → Critical Path →
-Case Study Narrative → Functional Requirements →
-Use Case Diagrams → Use Case Descriptors →
-Sequence/Activity Diagrams → Report Chapters →
-Peer Review → Formatting → Submission
+```mermaid
+graph LR
+    AL["Activity List"] --> WBS
+    WBS --> Gantt
+    Gantt --> CP["Critical Path"]
+    CP --> CSN["Case Study Narrative"]
+    CSN --> FR["Functional Requirements"]
+    FR --> UCD["Use Case Diagrams"]
+    UCD --> UCD2["Use Case Descriptors"]
+    UCD2 --> SAD["Sequence / Activity Diagrams"]
+    SAD --> RC["Report Chapters"]
+    RC --> PR["Peer Review"]
+    PR --> FMT["Formatting"]
+    FMT --> SUB["Submission"]
+
+    style AL fill:#e74c3c,color:#fff
+    style WBS fill:#e74c3c,color:#fff
+    style Gantt fill:#e74c3c,color:#fff
+    style CP fill:#e74c3c,color:#fff
+    style CSN fill:#e74c3c,color:#fff
+    style FR fill:#e74c3c,color:#fff
+    style UCD fill:#e74c3c,color:#fff
+    style UCD2 fill:#e74c3c,color:#fff
+    style SAD fill:#e74c3c,color:#fff
+    style RC fill:#e74c3c,color:#fff
+    style PR fill:#e74c3c,color:#fff
+    style FMT fill:#e74c3c,color:#fff
+    style SUB fill:#e74c3c,color:#fff
 ```
 
 Any delay on this chain directly delays the submission date. Tasks off the critical path (e.g., non-functional requirements, law & ethics) have float.

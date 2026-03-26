@@ -11,11 +11,38 @@
 
 The critical path is the longest sequence of dependent activities that determines the minimum project duration. Any delay to a critical-path activity directly delays the submission date.
 
-```
-A1.1 (PID) → A2.2 (WBS) → A2.3 (Gantt) → A3.1 (Narrative) → A3.3 (Functional Reqs)
-→ A4.1 (UCD: Billing) → A5.1 (UC Desc: Record Usage) → A7.1 (AD: Usage Recording)
-→ A8.1 (SD: API Call) → A12.4 (Write UML Chapter) → A12.8 (Peer Review)
-→ A12.9 (Formatting) → A13.1 (Slides) → A13.3 (Rehearsal) → A13.4 (Delivery)
+```mermaid
+graph LR
+    A1.1["A1.1 PID"] --> A2.2["A2.2 WBS"]
+    A2.2 --> A2.3["A2.3 Gantt"]
+    A2.3 --> A3.1["A3.1 Narrative"]
+    A3.1 --> A3.3["A3.3 Func. Reqs"]
+    A3.3 --> A4.1["A4.1 UCD: Billing"]
+    A4.1 --> A5.1["A5.1 UC Desc: Record Usage"]
+    A5.1 --> A7.1["A7.1 AD: Usage Recording"]
+    A7.1 --> A8.1["A8.1 SD: API Call"]
+    A8.1 --> A12.4["A12.4 Write UML Chapter"]
+    A12.4 --> A12.8["A12.8 Peer Review"]
+    A12.8 --> A12.9["A12.9 Formatting"]
+    A12.9 --> A13.1["A13.1 Slides"]
+    A13.1 --> A13.3["A13.3 Rehearsal"]
+    A13.3 --> A13.4["A13.4 Delivery"]
+
+    style A1.1 fill:#e74c3c,color:#fff
+    style A2.2 fill:#e74c3c,color:#fff
+    style A2.3 fill:#e74c3c,color:#fff
+    style A3.1 fill:#e74c3c,color:#fff
+    style A3.3 fill:#e74c3c,color:#fff
+    style A4.1 fill:#e74c3c,color:#fff
+    style A5.1 fill:#e74c3c,color:#fff
+    style A7.1 fill:#e74c3c,color:#fff
+    style A8.1 fill:#e74c3c,color:#fff
+    style A12.4 fill:#e74c3c,color:#fff
+    style A12.8 fill:#e74c3c,color:#fff
+    style A12.9 fill:#e74c3c,color:#fff
+    style A13.1 fill:#e74c3c,color:#fff
+    style A13.3 fill:#e74c3c,color:#fff
+    style A13.4 fill:#e74c3c,color:#fff
 ```
 
 ---
@@ -67,29 +94,53 @@ A1.1 (PID) → A2.2 (WBS) → A2.3 (Gantt) → A3.1 (Narrative) → A3.3 (Functi
 
 ---
 
-## Critical Path Diagram (Text Representation)
+## Critical Path Diagram
 
-```
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│ A1.1 PID │──▶│ A2.2 WBS │──▶│ A2.3     │──▶│ A2.5     │──▶│ A3.1     │
-│ (2 days) │   │ (2 days) │   │ Gantt    │   │ Crit.Path│   │ Narrative │
-└──────────┘   └──────────┘   │ (2 days) │   │ (1 day)  │   │ (3 days) │
-                              └──────────┘   └──────────┘   └──────────┘
-                                                                  │
-                                                                  ▼
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│ A8.1     │◀──│ A7.1     │◀──│ A5.1     │◀──│ A4.1     │◀──│ A3.3     │
-│ SD: API  │   │ AD: Usage│   │ UC Desc: │   │ UCD:     │   │ Func.    │
-│ (2 days) │   │ (2 days) │   │ Record   │   │ Billing  │   │ Reqs     │
-└──────────┘   └──────────┘   │ (1 day)  │   │ (2 days) │   │ (3 days) │
-     │                        └──────────┘   └──────────┘   └──────────┘
-     ▼
-┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐   ┌──────────┐
-│ A12.4    │──▶│ A12.8    │──▶│ A12.9    │──▶│ A13.3    │──▶│ A13.4    │
-│ Write UML│   │ Peer     │   │ Format & │   │ Rehearsal│   │ Final    │
-│ Chapter  │   │ Review   │   │ Proofread│   │ (1 day)  │   │ Delivery │
-│ (2 days) │   │ (1 day)  │   │ (2 days) │   └──────────┘   │ (1 day)  │
-└──────────┘   └──────────┘   └──────────┘                   └──────────┘
+```mermaid
+graph TD
+    subgraph Row1["Planning"]
+        A1.1["A1.1 PID<br><i>2 days</i>"]
+        A2.2["A2.2 WBS<br><i>2 days</i>"]
+        A2.3["A2.3 Gantt<br><i>2 days</i>"]
+        A2.5["A2.5 Crit. Path<br><i>1 day</i>"]
+        A3.1["A3.1 Narrative<br><i>3 days</i>"]
+    end
+
+    subgraph Row2["Analysis & Modelling"]
+        A3.3["A3.3 Func. Reqs<br><i>3 days</i>"]
+        A4.1["A4.1 UCD: Billing<br><i>2 days</i>"]
+        A5.1["A5.1 UC Desc: Record<br><i>1 day</i>"]
+        A7.1["A7.1 AD: Usage<br><i>2 days</i>"]
+        A8.1["A8.1 SD: API Call<br><i>2 days</i>"]
+    end
+
+    subgraph Row3["Report & Delivery"]
+        A12.4["A12.4 Write UML Chapter<br><i>2 days</i>"]
+        A12.8["A12.8 Peer Review<br><i>1 day</i>"]
+        A12.9["A12.9 Format & Proofread<br><i>2 days</i>"]
+        A13.3["A13.3 Rehearsal<br><i>1 day</i>"]
+        A13.4["A13.4 Final Delivery<br><i>1 day</i>"]
+    end
+
+    A1.1 --> A2.2 --> A2.3 --> A2.5 --> A3.1
+    A3.1 --> A3.3 --> A4.1 --> A5.1 --> A7.1 --> A8.1
+    A8.1 --> A12.4 --> A12.8 --> A12.9 --> A13.3 --> A13.4
+
+    style A1.1 fill:#e74c3c,color:#fff
+    style A2.2 fill:#e74c3c,color:#fff
+    style A2.3 fill:#e74c3c,color:#fff
+    style A2.5 fill:#e74c3c,color:#fff
+    style A3.1 fill:#e74c3c,color:#fff
+    style A3.3 fill:#e74c3c,color:#fff
+    style A4.1 fill:#e74c3c,color:#fff
+    style A5.1 fill:#e74c3c,color:#fff
+    style A7.1 fill:#e74c3c,color:#fff
+    style A8.1 fill:#e74c3c,color:#fff
+    style A12.4 fill:#e74c3c,color:#fff
+    style A12.8 fill:#e74c3c,color:#fff
+    style A12.9 fill:#e74c3c,color:#fff
+    style A13.3 fill:#e74c3c,color:#fff
+    style A13.4 fill:#e74c3c,color:#fff
 ```
 
 ---
