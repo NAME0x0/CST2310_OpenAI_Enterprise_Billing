@@ -21,9 +21,9 @@ README.md                          @NAME0x0
 
 # ─── Case Study ────────────────────────────────────────────
 02-case-study/narrative.md         @NAME0x0
-02-case-study/business-case.md     @Eeshitha-afk
+02-case-study/business-case.md     @Syed-Nihaal
 02-case-study/functional-requirements.md   @JakeSajith
-02-case-study/non-functional-requirements.md @JakeSajith
+02-case-study/non-functional-requirements.md @Eeshitha-afk
 02-case-study/data-collection-methods.md    @Syed-Nihaal
 
 # ─── UML Models ────────────────────────────────────────────
@@ -32,14 +32,14 @@ README.md                          @NAME0x0
 03-uml-models/class-diagram.md          @Syed-Nihaal
 03-uml-models/activity-diagrams.md      @Eeshitha-afk
 03-uml-models/sequence-diagrams.md      @Eeshitha-afk @Syed-Nihaal
-03-uml-models/collaboration-diagrams.md @Eeshitha-afk @Syed-Nihaal
+03-uml-models/collaboration-diagrams.md @Syed-Nihaal
 
 # ─── User Interfaces ──────────────────────────────────────
-04-user-interfaces/                @JakeSajith
+04-user-interfaces/                @NAME0x0
 
 # ─── Law & Ethics ──────────────────────────────────────────
-05-law-ethics/gdpr-analysis.md     @NAME0x0
-05-law-ethics/security-analysis.md @Syed-Nihaal
+05-law-ethics/gdpr-analysis.md     @Syed-Nihaal
+05-law-ethics/security-analysis.md @JakeSajith
 05-law-ethics/equality-analysis.md @Eeshitha-afk
 
 # ─── Meeting Minutes ──────────────────────────────────────
