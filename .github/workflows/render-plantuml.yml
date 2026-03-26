@@ -1,0 +1,139 @@
+name: Render PlantUML
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "03-uml-models/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "03-uml-models/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    name: Extract and Render PlantUML Diagrams
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PlantUML and dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq default-jre graphviz
+          curl -sSL -o /tmp/plantuml.jar https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
+
+      - name: Create output directory
+        run: mkdir -p 10-appendices/diagrams
+
+      - name: Extract and render PlantUML blocks from Markdown
+        run: |
+          RENDER_COUNT=0
+
+          for md_file in 03-uml-models/*.md; do
+            [ -f "$md_file" ] || continue
+            base=$(basename "$md_file" .md)
+
+            # Extract all ```plantuml blocks, writing each to a numbered .puml file
+            awk -v base="$base" -v outdir="10-appendices/diagrams" '
+              /^```plantuml/ { capture=1; idx++; next }
+              /^```/ && capture { capture=0; next }
+              capture { print >> (outdir "/" base "-" idx ".puml") }
+            ' "$md_file"
+          done
+
+          # Render all extracted .puml files to PNG
+          for puml in 10-appendices/diagrams/*.puml; do
+            [ -f "$puml" ] || continue
+            java -jar /tmp/plantuml.jar -tpng "$puml" && RENDER_COUNT=$((RENDER_COUNT + 1))
+          done
+
+          echo "Rendered $RENDER_COUNT diagram(s)."
+          echo "render_count=$RENDER_COUNT" >> "$GITHUB_ENV"
+
+      - name: Post render summary
+        run: |
+          echo "## PlantUML Render Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          PNG_COUNT=$(find 10-appendices/diagrams -name "*.png" 2>/dev/null | wc -l)
+          PUML_COUNT=$(find 10-appendices/diagrams -name "*.puml" 2>/dev/null | wc -l)
+
+          echo "| Metric | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          echo "| PlantUML blocks extracted | $PUML_COUNT |" >> $GITHUB_STEP_SUMMARY
+          echo "| PNG images rendered | $PNG_COUNT |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$PNG_COUNT" -gt 0 ]; then
+            echo "### Rendered Files" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            for f in 10-appendices/diagrams/*.png; do
+              echo "- \`$(basename "$f")\`" >> $GITHUB_STEP_SUMMARY
+            done
+          fi
+
+      - name: Commit rendered diagrams
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 10-appendices/diagrams/
+          if git diff --cached --quiet; then
+            echo "No new diagrams to commit."
+          else
+            git commit -m "ci: render PlantUML diagrams to PNG [skip ci]"
+            git push
+          fi
+
+  lint:
+    name: Validate PlantUML Syntax
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install PlantUML
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq default-jre graphviz
+          curl -sSL -o /tmp/plantuml.jar https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar
+
+      - name: Extract and syntax-check PlantUML blocks
+        run: |
+          ERRORS=0
+          mkdir -p /tmp/puml-check
+
+          for md_file in 03-uml-models/*.md; do
+            [ -f "$md_file" ] || continue
+            base=$(basename "$md_file" .md)
+
+            awk -v base="$base" -v outdir="/tmp/puml-check" '
+              /^```plantuml/ { capture=1; idx++; next }
+              /^```/ && capture { capture=0; next }
+              capture { print >> (outdir "/" base "-" idx ".puml") }
+            ' "$md_file"
+          done
+
+          for puml in /tmp/puml-check/*.puml; do
+            [ -f "$puml" ] || continue
+            if ! java -jar /tmp/plantuml.jar -syntax "$puml" 2>&1 | grep -q "NO ERROR"; then
+              echo "::error file=$puml::PlantUML syntax error in $(basename "$puml")"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done
+
+          if [ "$ERRORS" -gt 0 ]; then
+            echo "$ERRORS PlantUML syntax error(s) found."
+            exit 1
+          else
+            echo "All PlantUML blocks pass syntax validation."
+          fi

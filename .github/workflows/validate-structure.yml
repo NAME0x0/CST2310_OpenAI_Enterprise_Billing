@@ -1,0 +1,118 @@
+name: Validate Structure
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Check Required Deliverables Exist
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate project structure
+        run: |
+          MISSING=0
+          TOTAL=0
+
+          check_file() {
+            TOTAL=$((TOTAL + 1))
+            if [ -f "$1" ]; then
+              echo "  [PASS] $1"
+            else
+              echo "  [MISS] $1"
+              MISSING=$((MISSING + 1))
+            fi
+          }
+
+          echo "## Project Structure Validation" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          echo "### 01 — Project Management (20 marks)"
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "#### Project Management" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          check_file "01-project-management/activity-list.md"
+          check_file "01-project-management/WBS.md"
+          check_file "01-project-management/gantt-chart-guide.md"
+          check_file "01-project-management/risk-matrix.md"
+          check_file "01-project-management/critical-path.md"
+
+          echo ""
+          echo "### 02 — Case Study (10 marks)"
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "#### Case Study" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          check_file "02-case-study/narrative.md"
+          check_file "02-case-study/business-case.md"
+          check_file "02-case-study/functional-requirements.md"
+          check_file "02-case-study/non-functional-requirements.md"
+          check_file "02-case-study/data-collection-methods.md"
+
+          echo ""
+          echo "### 03 — UML Models (55 marks)"
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "#### UML Models" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          check_file "03-uml-models/use-case-diagrams.md"
+          check_file "03-uml-models/use-case-descriptors.md"
+          check_file "03-uml-models/class-diagram.md"
+          check_file "03-uml-models/activity-diagrams.md"
+          check_file "03-uml-models/sequence-diagrams.md"
+          check_file "03-uml-models/collaboration-diagrams.md"
+
+          echo ""
+          echo "### 04 — User Interfaces"
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "#### User Interfaces" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          check_file "04-user-interfaces/ui-designs.md"
+
+          echo ""
+          echo "### 05 — Law & Ethics (10 marks)"
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "#### Law & Ethics" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          check_file "05-law-ethics/gdpr-analysis.md"
+          check_file "05-law-ethics/security-analysis.md"
+          check_file "05-law-ethics/equality-analysis.md"
+
+          echo ""
+          echo "### 08 — Final Report"
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "#### Final Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          check_file "08-final-report/report.md"
+
+          echo ""
+          echo "### Meta Files"
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "#### Meta Files" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          check_file "CONTRIBUTING.md"
+          check_file ".github/CODEOWNERS"
+          check_file ".cspell.json"
+          check_file ".markdownlint.json"
+
+          echo ""
+          echo "---"
+          PRESENT=$((TOTAL - MISSING))
+          echo "Result: $PRESENT / $TOTAL files present ($MISSING missing)"
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Result:** $PRESENT / $TOTAL required files present" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$MISSING" -gt 0 ]; then
+            echo ""
+            echo "::warning::$MISSING required deliverable file(s) missing from the repository."
+          fi
