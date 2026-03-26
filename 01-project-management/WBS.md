@@ -173,18 +173,18 @@
 | WBS Code | Work Package | Description | Owner | Target |
 |---|---|---|---|---|
 | 1.1.1 | Activity List | Comprehensive task list with durations and dependencies | Afsah | Week 7 |
-| 1.1.2 | WBS | This document; hierarchical deliverables breakdown | [Member 2] | Week 7 |
+| 1.1.2 | WBS | This document; hierarchical deliverables breakdown | Syed | Week 7 |
 | 1.1.3 | Gantt Chart | Scheduled timeline with dependencies and milestones | Afsah | Week 8 |
 | 1.1.4 | Risk Matrix | 9–10 risks with mitigations and contingency plans | [Member 3] | Week 8 |
 | 1.1.5 | Critical Path | Zero-float activity analysis with slack calculations | Afsah | Week 8 |
 | 1.2.1 | Case Study Narrative | System background, problems, proposed solution, BIS classification | Afsah | Week 8 |
-| 1.2.2 | Business Case | Problem, solution, benefits, costs, ROI, KPIs | [Member 2] | Week 8 |
+| 1.2.2 | Business Case | Problem, solution, benefits, costs, ROI, KPIs | Syed | Week 8 |
 | 1.2.3 | Functional Requirements | 15–20 FRs with MoSCoW prioritisation | [Member 3] | Week 9 |
 | 1.2.4 | Non-Functional Requirements | 10–15 NFRs across quality categories | [Member 4] | Week 9 |
-| 1.2.6 | Data Collection Methods | 4–5 elicitation techniques documented | [Member 2] | Week 9 |
+| 1.2.6 | Data Collection Methods | 4–5 elicitation techniques documented | Syed | Week 9 |
 | 1.3.1 | Use Case Diagrams | 4–6 UCDs with actors and relationships | [Member 3] | Week 10 |
-| 1.3.2 | Use Case Descriptors | 4–6 fully dressed descriptors | [Member 2] | Week 10 |
-| 1.3.3–4 | Class Diagram + ERD | Complete domain model with ERD | [Member 2] | Week 10 |
+| 1.3.2 | Use Case Descriptors | 4–6 fully dressed descriptors | Syed | Week 10 |
+| 1.3.3–4 | Class Diagram + ERD | Complete domain model with ERD | Syed | Week 10 |
 | 1.3.5 | Activity Diagrams | 4–6 ADs with swim lanes | [Member 3] | Week 11 |
 | 1.3.6 | Sequence Diagrams | 4–6 SDs with fragments | [Member 4] | Week 11 |
 | 1.3.7 | Collaboration Diagrams | 4–6 CDs corresponding to SDs | [Member 4] | Week 11 |
